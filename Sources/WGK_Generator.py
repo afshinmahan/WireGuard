@@ -35,6 +35,17 @@ listen_port = input("Please Enter Listen Port : ")
 endpoint_IP = input("Please Enter Endpoint : ")
 endpoint = endpoint_IP+":"+listen_port
 
+# Getting The Pesistance keep alive
+PerKeepAlive = 25
+PersisKeepAliveYN = "N"
+PersisKeepAliveYN = ("Do you want to Change persistance keep alive(y/N): ")
+if(PersisKeepAliveYN =="y" or PersisKeepAliveYN=="Y"):
+    PerKeepAlive = input("Enter the desired number for PersistanceKeepalive: ")
+if(PersisKeepAliveYN ==""):
+    PerKeepAlive = input("Enter the desired number for PersistanceKeepalive: ")
+
+
+
 #Get thenumber of needed clients
 
 clients = int(input("Please enter the number of needed clients : "))
@@ -122,6 +133,11 @@ def main():
         client_config += f"AllowedIPs = 0.0.0.0/0\n"
 
         client_config += f"Endpoint = {endpoint}\n"
+
+#adding PersistantKeepalive if changed
+        if(PerKeepAlive != 25):
+            client_config += f"PersistantKeepalive = {PerKeepAlive}\n"
+            
         client_configs.append(client_config)
 
         print("*"*10 + f" Client-Conf {i} " + "*"*10)
